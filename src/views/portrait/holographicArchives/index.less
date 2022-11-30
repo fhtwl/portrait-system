@@ -1,0 +1,29 @@
+.holographic-archives {
+  .top {
+    display: flex;
+    justify-content: space-between;
+    .box {
+      display: flex;
+      padding: 18px;
+      background: linear-gradient(90deg, #1c59a6, #0b335d);
+      &.left {
+        width: calc(50% - 9px);
+        .right {
+          padding-left: 20px;
+        }
+      }
+    }
+    .right {
+      width: calc(50% - 9px);
+      display: flex;
+      justify-content: space-between;
+      .comprehensive-score {
+        flex: 1;
+        margin-right: 18px;
+      }
+      .total-box {
+        flex: 2;
+      }
+    }
+  }
+}
