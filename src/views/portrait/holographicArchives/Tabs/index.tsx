@@ -2,9 +2,9 @@ import { defineComponent, ref } from 'vue';
 import BasicInfo from './BasicInfo';
 import EmotionalAnalysis from './EmotionalAnalysis';
 import './index.less';
-import SimilarityAnalysis from './SimilarityAnalysis';
+import PreviousResume from './PreviousResume';
 
-type TabType = 'basicInfo' | 'similarityAnalysis' | 'emotionalAnalysis';
+type TabType = 'basicInfo' | 'previousResume' | 'emotionalAnalysis';
 interface Tab {
   value: TabType;
   label: string;
@@ -19,8 +19,8 @@ export default defineComponent({
         label: '基本信息',
       },
       {
-        value: 'similarityAnalysis',
-        label: '相似度分析',
+        value: 'previousResume',
+        label: '过往履历',
       },
       {
         value: 'emotionalAnalysis',
@@ -43,8 +43,8 @@ export default defineComponent({
       switch (this.activeKey) {
         case 'basicInfo':
           return <BasicInfo />;
-        case 'similarityAnalysis':
-          return <SimilarityAnalysis />;
+        case 'previousResume':
+          return <PreviousResume />;
         case 'emotionalAnalysis':
           return <EmotionalAnalysis />;
         default:
