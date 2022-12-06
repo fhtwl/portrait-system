@@ -3,8 +3,13 @@ import BasicInfo from './BasicInfo';
 import EmotionalAnalysis from './EmotionalAnalysis';
 import './index.less';
 import PreviousResume from './PreviousResume';
+import RelationalAtlas from './RelationalAtlas';
 
-type TabType = 'basicInfo' | 'previousResume' | 'emotionalAnalysis';
+type TabType =
+  | 'basicInfo'
+  | 'previousResume'
+  | 'emotionalAnalysis'
+  | 'relationalAtlas';
 interface Tab {
   value: TabType;
   label: string;
@@ -25,6 +30,10 @@ export default defineComponent({
       {
         value: 'emotionalAnalysis',
         label: '情感分析',
+      },
+      {
+        value: 'relationalAtlas',
+        label: '关系图谱',
       },
     ]);
     const hanldeActiveChange = (key: TabType) => {
@@ -47,6 +56,8 @@ export default defineComponent({
           return <PreviousResume />;
         case 'emotionalAnalysis':
           return <EmotionalAnalysis />;
+        case 'relationalAtlas':
+          return <RelationalAtlas />;
         default:
           return null;
       }

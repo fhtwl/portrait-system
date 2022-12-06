@@ -9,7 +9,7 @@ import 'dayjs/locale/zh-cn';
 dayjs.locale('cn');
 ConfigProvider.config({
   theme: {
-    primaryColor: '#18a058',
+    primaryColor: '#0091ff',
   },
 });
 </script>

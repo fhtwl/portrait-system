@@ -5,7 +5,7 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   setup() {
     return {
-      color: '#18a058',
+      color: '#0091ff',
       setColor(color: string) {
         document.documentElement.style.setProperty(
           '--ant-primary-color',

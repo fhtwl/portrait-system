@@ -1,0 +1,19 @@
+.relational-select {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  .relational-item {
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #aaa;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    &.active {
+      background: @primary-color;
+      border-color: @primary-color;
+    }
+  }
+}
