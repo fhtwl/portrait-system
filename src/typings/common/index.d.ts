@@ -73,5 +73,6 @@ declare module '@vue/runtime-core' {
     $message: MessageApi;
     $confirm: ModalFunc;
     $notification: NotificationApi;
+    // $echarts: echarts;
   }
 }

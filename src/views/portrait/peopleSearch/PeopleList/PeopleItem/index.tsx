@@ -3,11 +3,13 @@ import './index.less';
 import { attitudeOptions, AttitudeType } from './const';
 import BorderHornBox from '@/components/BorderHornBox';
 
+export type Tag = string;
 export interface Item {
   pic: string;
   name: string;
   attitude: AttitudeType;
   id: number | string;
+  tags: Tag[];
 }
 
 export default defineComponent({

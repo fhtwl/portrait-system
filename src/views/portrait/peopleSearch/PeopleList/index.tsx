@@ -1,14 +1,7 @@
 import { defineComponent, ref } from 'vue';
 import './index.less';
 import { attitudeOptions, AttitudeType } from './PeopleItem/const';
-import PeopleItem from './PeopleItem';
-
-interface Item {
-  pic: string;
-  name: string;
-  attitude: AttitudeType;
-  id: number | string;
-}
+import PeopleItem, { Item } from './PeopleItem';
 
 export default defineComponent({
   setup() {
@@ -18,6 +11,7 @@ export default defineComponent({
         name: '汪淼',
         attitude: 0,
         id: 0,
+        tags: [],
       },
     ]);
     return {
