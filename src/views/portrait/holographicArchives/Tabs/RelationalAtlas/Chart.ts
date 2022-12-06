@@ -312,7 +312,9 @@ export default class Chart {
    */
   public updateMinimap(isShow: boolean) {
     // const conf = minimap.getDefaultCfgs();
+    console.log(minimap);
     minimap._cfgs.size = isShow ? [100, 100] : [0, 0];
+    minimap.getViewport().style.display = isShow ? 'block' : 'none';
     // conf.size = isShow ? [100, 100] : [0, 0];
     minimap.updateCanvas();
   }
