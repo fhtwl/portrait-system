@@ -1,6 +1,7 @@
 import { defineComponent, ref } from 'vue';
 import BasicInfo from './BasicInfo';
 import EmotionalAnalysis from './EmotionalAnalysis';
+import FocusOnActivities from './FocusOnActivities';
 import './index.less';
 import PreviousResume from './PreviousResume';
 import RelationalAtlas from './RelationalAtlas';
@@ -9,7 +10,8 @@ type TabType =
   | 'basicInfo'
   | 'previousResume'
   | 'emotionalAnalysis'
-  | 'relationalAtlas';
+  | 'relationalAtlas'
+  | 'focusOnActivities';
 interface Tab {
   value: TabType;
   label: string;
@@ -35,6 +37,10 @@ export default defineComponent({
         value: 'relationalAtlas',
         label: '关系图谱',
       },
+      {
+        value: 'focusOnActivities',
+        label: '关注活动',
+      },
     ]);
     const hanldeActiveChange = (key: TabType) => {
       if (key !== activeKey.value) {
@@ -58,6 +64,8 @@ export default defineComponent({
           return <EmotionalAnalysis />;
         case 'relationalAtlas':
           return <RelationalAtlas />;
+        case 'focusOnActivities':
+          return <FocusOnActivities />;
         default:
           return null;
       }
