@@ -16,6 +16,15 @@ export default defineComponent({
       type: Number,
       default: 20,
     },
+    showSizeChanger: {
+      type: Boolean,
+      default: true,
+    },
+    showTotal: {
+      type: Function,
+      default: (total: number, pageSize: number) =>
+        `共${total}条记录，每页${pageSize}条`,
+    },
   },
   emits: ['change'],
   setup() {
@@ -29,7 +38,14 @@ export default defineComponent({
     };
   },
   render() {
-    const { current, total, handlePageChange, pageSize } = this;
+    const {
+      current,
+      total,
+      handlePageChange,
+      pageSize,
+      showSizeChanger,
+      showTotal,
+    } = this;
     return (
       <div class="pagination">
         <a-pagination
@@ -37,9 +53,9 @@ export default defineComponent({
           page-size-options={pageSizeOptions}
           page-size={pageSize}
           show-quick-jumper
-          show-size-changer
+          show-size-changer={showSizeChanger}
           total={total}
-          show-total={(total: number) => `共${total}条记录，每页${pageSize}条`}
+          show-total={(total: number) => showTotal(total, pageSize)}
           onChange={handlePageChange}
           onShowSizeChange={handlePageChange}
         />

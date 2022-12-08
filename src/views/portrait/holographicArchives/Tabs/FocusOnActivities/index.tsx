@@ -85,6 +85,7 @@ export default defineComponent({
       total,
       pageSize,
       handlePageChange,
+      date,
     };
   },
   render() {
@@ -97,6 +98,7 @@ export default defineComponent({
       total,
       pageSize,
       handlePageChange,
+      date,
     } = this;
     return (
       <div class="focus-on-activities">
@@ -111,7 +113,7 @@ export default defineComponent({
               return (
                 <div
                   onClick={() => handleDateClick(item.value)}
-                  class="date-item"
+                  class={`date-item ${date === item.value ? 'active' : ''}`}
                 >
                   {item.label}
                 </div>
