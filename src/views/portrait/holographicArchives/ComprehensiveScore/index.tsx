@@ -16,10 +16,7 @@ import {
   GridComponent,
   DatasetComponent,
   TransformComponent,
-  TitleComponentOption,
-  TooltipComponentOption,
-  GridComponentOption,
-  DatasetComponentOption,
+  PolarComponent,
 } from 'echarts/components';
 
 import { LabelLayout, UniversalTransition } from 'echarts/features';
@@ -35,6 +32,7 @@ echarts.use([
   LabelLayout,
   UniversalTransition,
   CanvasRenderer,
+  PolarComponent,
 ]);
 let chart: echarts.ECharts;
 
@@ -52,9 +50,128 @@ export default defineComponent({
       const dom = instance!.refs.pieRef;
       console.log(dom);
       chart = echarts.init(dom as HTMLElement);
-      const options = {
-        series: [
+      const getmax = 100;
+      const color = {
+        type: 'linear',
+        x: 0,
+        y: 0,
+        x2: 0,
+        y2: 1,
+        colorStops: [
           {
+            offset: 0,
+            color: 'rgba(39, 223, 152, 1)',
+          },
+
+          {
+            offset: 1,
+            color: 'rgba(0,138,255,1)',
+          },
+        ],
+      };
+      const options = {
+        angleAxis: {
+          show: false,
+
+          max: (getmax * 360) / 180, //-45度到225度，二者偏移值是270度除360度
+
+          type: 'value',
+
+          startAngle: 180, //极坐标初始角度
+
+          splitLine: {
+            show: false,
+          },
+        },
+
+        barMaxWidth: 5, //圆环宽度
+
+        radiusAxis: {
+          show: false,
+          type: 'category',
+        },
+
+        //圆环位置和大小
+
+        polar: {
+          center: ['50%', '50%'],
+
+          radius: '130%',
+        },
+
+        series: [
+          // {
+          //   type: 'bar',
+
+          //   data: [
+          //     {
+          //       //上层圆环，显示数据
+
+          //       value: 45,
+
+          //       itemStyle: {
+          //         color: {
+          //           type: 'linear',
+          //           x: 0,
+          //           y: 0,
+          //           x2: 0,
+          //           y2: 1,
+          //           colorStops: [
+          //             {
+          //               offset: 0,
+          //               color: 'rgba(39, 223, 152, 1)',
+          //             },
+
+          //             {
+          //               offset: 1,
+          //               color: 'rgba(139, 255, 215, 1)',
+          //             },
+          //           ],
+          //         },
+          //       },
+          //     },
+          //   ],
+
+          //   barGap: '-100%', //柱间距离,上下两层圆环重合
+
+          //   coordinateSystem: 'polar',
+
+          //   roundCap: true, //顶端圆角
+
+          //   z: 3, //圆环层级，同zindex
+          // },
+
+          // {
+          //   //下层圆环，显示最大值
+
+          //   type: 'bar',
+
+          //   data: [
+          //     {
+          //       value: getmax,
+
+          //       itemStyle: {
+          //         color: '#fff',
+
+          //         opacity: 0.2,
+
+          //         borderWidth: 0,
+          //       },
+          //     },
+          //   ],
+
+          //   barGap: '-100%',
+
+          //   coordinateSystem: 'polar',
+
+          //   roundCap: true,
+
+          //   z: 1,
+          // },
+
+          //仪表盘
+          {
+            radius: '90%',
             type: 'gauge',
             startAngle: 210,
             endAngle: -30,
@@ -62,7 +179,7 @@ export default defineComponent({
             max: 100,
             splitNumber: 10,
             itemStyle: {
-              color: '#58D9F9',
+              color,
               shadowColor: 'rgba(0,138,255,0.45)',
               shadowBlur: 10,
               shadowOffsetX: 0,
@@ -71,29 +188,19 @@ export default defineComponent({
             progress: {
               show: true,
               roundCap: true,
-              width: 3,
+              width: 5,
             },
             pointer: {
-              // icon: 'path://M2090.36389,615.30999 L2090.36389,615.30999 C2091.48372,615.30999 2092.40383,616.194028 2092.44859,617.312956 L2096.90698,728.755929 C2097.05155,732.369577 2094.2393,735.416212 2090.62566,735.56078 C2090.53845,735.564269 2090.45117,735.566014 2090.36389,735.566014 L2090.36389,735.566014 C2086.74736,735.566014 2083.81557,732.63423 2083.81557,729.017692 C2083.81557,728.930412 2083.81732,728.84314 2083.82081,728.755929 L2088.2792,617.312956 C2088.32396,616.194028 2089.24407,615.30999 2090.36389,615.30999 Z',
-              length: '70%',
-              width: 2,
-              offsetCenter: [0, '5%'],
-              itemStyle: {
-                color: '#fff',
-                // borderColor: '#fff',
-                // borderCap: 'round',
-                // borderWidth: 10,
-                shadowColor: '#fff',
-                shadowBlur: 10,
-              },
+              show: false,
             },
             axisLine: {
-              roundCap: true,
+              roundCap: false,
               lineStyle: {
                 width: 3,
               },
             },
             axisTick: {
+              show: false,
               splitNumber: 5,
               lineStyle: {
                 width: 1,
@@ -117,6 +224,53 @@ export default defineComponent({
               show: false,
             },
             detail: {
+              show: false,
+            },
+            data: [
+              {
+                value: 100,
+              },
+            ],
+          },
+          {
+            type: 'gauge',
+            radius: '96%',
+            startAngle: 210,
+            endAngle: -30,
+            axisLine: {
+              show: false,
+            },
+
+            splitLine: {
+              show: false,
+            },
+
+            axisTick: {
+              show: true,
+            },
+
+            axisLabel: {
+              show: false,
+            },
+
+            splitLabel: {
+              show: false,
+            },
+
+            pointer: {
+              icon: 'circle', // 箭头图标
+              length: '15%',
+              width: 20,
+              height: 20,
+              offsetCenter: [0, '-82%'], // 箭头位置
+              itemStyle: {
+                color: '#fff', // 箭头颜色
+                shadowColor: '#fff',
+                shadowBlur: 10,
+              },
+            },
+            z: 10,
+            detail: {
               // backgroundColor: '#fff',
               borderColor: 'transparent',
               borderWidth: 2,
@@ -124,21 +278,21 @@ export default defineComponent({
               lineHeight: 40,
               height: 40,
               borderRadius: 8,
-              offsetCenter: [10, '42%'],
+              offsetCenter: [4, '5%'],
               valueAnimation: true,
               formatter: function (value: number) {
                 return '{value|' + value.toFixed(0) + '}{unit|分}';
               },
               rich: {
                 value: {
-                  fontSize: 40,
+                  fontSize: 58,
                   fontWeight: 'bolder',
                   color: '#fff',
                 },
                 unit: {
                   fontSize: 12,
                   color: '#999',
-                  padding: [0, 0, -20, 10],
+                  padding: [0, 0, -20, 0],
                 },
               },
             },
@@ -147,6 +301,63 @@ export default defineComponent({
                 value: 45,
               },
             ],
+          },
+          {
+            type: 'gauge',
+            radius: '100.5%',
+
+            startAngle: 204,
+            endAngle: -23,
+            min: 0,
+            max: 100,
+            splitNumber: 100,
+            axisLine: {
+              roundCap: true,
+              lineStyle: {
+                width: 0,
+                // color: '#cccccc',
+              },
+            },
+            progress: {
+              show: true,
+              roundCap: true,
+              width: 1,
+            },
+            itemStyle: {
+              color,
+              shadowColor: color,
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowOffsetY: 0,
+            },
+            axisTick: {
+              show: false,
+            },
+            splitLine: {
+              show: false,
+              length: 1,
+              lineStyle: {
+                // color: '#cccccc',
+                width: 1,
+              },
+            },
+            axisLabel: {
+              show: false,
+            },
+            title: {
+              show: false,
+            },
+            pointer: {
+              show: false,
+            },
+            data: [
+              {
+                value: 100,
+              },
+            ],
+            detail: {
+              show: false,
+            },
           },
         ],
       };

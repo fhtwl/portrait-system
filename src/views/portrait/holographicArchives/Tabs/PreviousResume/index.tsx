@@ -139,14 +139,34 @@ export default defineComponent({
         };
       });
       console.log(xData, yData, seriesData);
+      const lineStyle = {
+        color: '#05CC69',
+        opacity: 0.4,
+      };
       chart = echarts.init(dom as HTMLElement);
       const options = {
         xAxis: {
           type: 'category',
           data: xData,
+          axisPointer: {
+            show: true,
+            lineStyle,
+          },
         },
         yAxis: {
           data: yData,
+          boundaryGap: true,
+          type: 'category',
+          axisTick: {
+            alignWithLabel: true,
+          },
+          axisPointer: {
+            show: true,
+            lineStyle,
+          },
+          axisLine: {
+            symbol: ['none', 'arrow'],
+          },
         },
         dataZoom: {
           type: 'inside',
@@ -160,7 +180,7 @@ export default defineComponent({
             label: {
               show: true,
               color: '#fff',
-              position: 'top',
+              position: 'inside',
               formatter: function (param: { name: string; value: string }) {
                 const { name, value } = param;
                 return `${value[1]} ${name}`;
@@ -168,6 +188,9 @@ export default defineComponent({
             },
             data: seriesData,
             type: 'scatter',
+            emphasis: {
+              symbolSize: 0,
+            },
           },
         ],
       };
