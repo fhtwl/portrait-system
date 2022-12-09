@@ -86,6 +86,7 @@ export default defineComponent({
     const { current, pageSize, total, handlePageChange, list } = this;
     return (
       <div class="body-wrap">
+        <a-datePicker></a-datePicker>
         <Search />
         <Initial />
         <PeopleList list={list} />

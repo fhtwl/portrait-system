@@ -1,6 +1,6 @@
 import { markRaw } from 'vue';
 import { getUserMenu } from '@/api/system/user';
-import { BasicLayout, BlankLayout, RouteView, PageView } from '@/layouts';
+import { BlankLayout, PageView } from '@/layouts';
 import { listToTree } from '@/utils/utils';
 import router from '..';
 
@@ -12,12 +12,8 @@ const modules = getModules();
 const constantRouterComponents: Common.Params = {
   // 基础页面 layout 必须引入
 
-  // 二级路由包裹组件
-  BasicLayout: markRaw(BasicLayout),
   // 空白布局
   BlankLayout: markRaw(BlankLayout),
-  // 一级路由
-  RouteView: markRaw(RouteView),
   // 独立页面
   PageView: markRaw(PageView),
   404: () => import('@/views/system/exception/404/index.vue'),
@@ -26,18 +22,18 @@ const constantRouterComponents: Common.Params = {
 function loadAllPage() {
   for (const path in modules) {
     modules[path]().then((mod) => {
-      const file = mod.default;
-      console.log(file.name);
-      file.displayName = file.name;
-      if (file.isPage) {
-        constantRouterComponents[`${file.name}`] = () => Promise.resolve(file);
-        router.addRoute(file.name, {
-          path: file.path,
-          name: file.component,
-          meta: file.meta,
-          component: file,
-        });
-      }
+      // const file = mod.default;
+      // console.log(file.name);
+      // file.displayName = file.name;
+      // if (file.isPage) {
+      //   constantRouterComponents[`${file.name}`] = () => Promise.resolve(file);
+      //   router.addRoute(file.name, {
+      //     path: file.path,
+      //     name: file.component,
+      //     meta: file.meta,
+      //     component: file,
+      //   });
+      // }
     });
   }
 }

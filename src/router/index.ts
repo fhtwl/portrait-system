@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 
 import common from './modules/common';
 import portrait from './modules/portrait';
@@ -6,7 +6,7 @@ import portrait from './modules/portrait';
 const routes = [...common, ...portrait];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 });
 
